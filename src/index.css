@@ -1,15 +1,300 @@
+/* === colores del kit de Figma, si cambia el diseño se cambian aquí === */
 :root {
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  color-scheme: light dark;
+  --color-primary: #d32f2f;
+  --color-primary-hover: #b71c1c;
+  --color-charcoal: #1e293b;
+  --color-text: #111827;
+  --color-text-secondary: #475569;
+  --color-page: #f8fafc;
+  --color-surface: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-white: #ffffff;
+  --color-error-bg: #fef2f2;
+  --color-error-border: #e97373;
+  --color-error-text: #991b1b;
+
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-body {
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
+}
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--color-page);
+}
+
+/* === panel oscuro de la izquierda con la franja roja === */
+.auth-story {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 32px 48px 32px 56px;
+  border-left: 8px solid var(--color-primary);
+  color: var(--color-white);
+  background: var(--color-charcoal);
+}
+
+.auth-logo {
+  display: block;
+  width: 140px;
+  height: auto;
+  padding: 6px;
+  border-radius: 6px;
+  background: var(--color-white);
+}
+.auth-story-eyebrow {
+  margin: 24px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.auth-story-copy { margin: 56px 0 40px; }
+.auth-story-copy h1 {
   margin: 0;
+  max-width: 520px;
+  font-size: clamp(38px, 3.2vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.auth-story-copy p { margin: 16px 0 0; color: #cbd5e1; font-size: 16px; line-height: 1.6; }
+
+/* === tarjeta blanca con los laboratorios y el horario === */
+.auth-labs {
+  max-width: 520px;
+  margin: auto 0 32px;
+  padding: 24px;
+  border-radius: 12px;
+  color: var(--color-text);
+  background: var(--color-white);
+}
+.auth-labs-title {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.auth-labs-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 16px 0 24px;
+  padding: 0;
+  list-style: none;
+}
+.auth-labs-list li {
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--color-surface);
+  font-size: 14px;
+  font-weight: 600;
+}
+.auth-labs-hours { margin: 0; color: var(--color-text-secondary); font-size: 12px; }
+.auth-labs-hours-value { display: block; margin-top: 4px; color: var(--color-text); font-size: 24px; font-weight: 800; }
+
+.auth-story-footer { display: flex; flex-direction: column; gap: 4px; margin: 0; font-size: 14px; }
+.auth-story-footer span { color: #cbd5e1; font-size: 12px; }
+
+.auth-panel {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+  min-height: 100vh;
+  background: var(--color-page);
 }
 
-main {
-  max-width: 960px;
+.auth-card {
+  align-self: center;
+  width: min(520px, calc(100% - 64px));
   margin: 0 auto;
-  padding: 1rem;
+  padding: 48px 0 32px;
+}
+/* === logo con "UTR Labs" que solo se ve en pantallas angostas === */
+.auth-card-brand { display: none; }
+.auth-card-header h1 { margin: 0; color: var(--color-text); font-size: 30px; line-height: 1.2; letter-spacing: -0.03em; }
+.auth-card-header p { margin: 8px 0 0; color: var(--color-text-secondary); font-size: 14px; }
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 48px;
+  margin: 24px 0;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+.auth-tabs-item {
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth-tabs-item-active {
+  border-color: var(--color-border);
+  color: var(--color-primary);
+  background: var(--color-white);
+}
+
+.auth-form { display: flex; flex-direction: column; gap: 8px; }
+.auth-form label { margin-top: 8px; color: var(--color-text); font-size: 13px; font-weight: 600; }
+.auth-form input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0 16px;
+  color: var(--color-text);
+  background: var(--color-white);
+  font-size: 14px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.auth-form input::placeholder { color: #64748b; }
+.auth-form input:hover { border-color: #cbd5e1; }
+.auth-form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+  outline: none;
+}
+.auth-form-hint { margin: 0; color: var(--color-text-secondary); font-size: 12px; }
+.auth-form-help { display: flex; justify-content: flex-start; }
+.auth-form-help button {
+  border: 0;
+  padding: 4px 0;
+  color: var(--color-primary);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* === banner de error del kit: borde rojo claro, fondo rosa y un "!" === */
+.auth-form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-error-border);
+  border-radius: 8px;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+  font-size: 14px;
+  font-weight: 600;
+}
+.auth-form-error span { font-weight: 800; }
+.auth-form-error p { margin: 0; }
+
+.auth-form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.auth-form-submit:hover:not(:disabled) { background: var(--color-primary-hover); }
+.auth-form-submit:disabled { cursor: wait; }
+
+/* === circulito que gira dentro del botón mientras carga === */
+.auth-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: auth-spin 0.8s linear infinite;
+}
+@keyframes auth-spin {
+  to { transform: rotate(360deg); }
+}
+
+.auth-card-support { margin: 16px 0 0; color: var(--color-text-secondary); text-align: center; font-size: 12px; }
+.auth-card-support a { color: var(--color-text-secondary); }
+.auth-panel-footer { margin: 0; padding: 16px 0 24px; color: var(--color-text-secondary); text-align: center; font-size: 12px; }
+
+.session-placeholder {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: var(--color-page);
+}
+
+.session-placeholder h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 30px;
+}
+
+.session-placeholder p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.session-placeholder button {
+  height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.session-placeholder button:hover { background: var(--color-primary-hover); }
+
+@media (max-width: 900px) {
+  .auth-story { padding: 24px 24px 24px 32px; }
+  .auth-story-copy h1 { font-size: 34px; }
+  .auth-labs-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .auth-shell { display: block; }
+  .auth-story { display: none; }
+  .auth-card { align-self: start; width: calc(100% - 40px); padding: 20px 0 16px; }
+  .auth-card-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .auth-card-brand img { width: 96px; height: auto; }
+  .auth-card-brand span { color: var(--color-text); font-size: 16px; font-weight: 800; }
+  .auth-card-header h1 { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
