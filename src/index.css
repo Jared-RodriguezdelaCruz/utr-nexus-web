@@ -93,14 +93,28 @@ button:focus-visible, a:focus-visible {
 }
 .auth-labs-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin: 16px 0 24px;
   padding: 0;
   list-style: none;
 }
-.auth-labs-list li {
-  padding: 12px;
+.auth-labs-building {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+.auth-labs-building-name { color: var(--color-text-secondary); font-size: 12px; font-weight: 700; }
+.auth-labs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.auth-labs-chip {
+  padding: 6px 12px;
   border-radius: 6px;
   background: var(--color-surface);
   font-size: 14px;
@@ -278,7 +292,6 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 900px) {
   .auth-story { padding: 24px 24px 24px 32px; }
   .auth-story-copy h1 { font-size: 34px; }
-  .auth-labs-list { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {

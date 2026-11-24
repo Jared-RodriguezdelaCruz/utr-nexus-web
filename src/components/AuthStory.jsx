@@ -1,4 +1,4 @@
-import { LABS } from '../utils/constants'
+import { BUILDINGS, LABS } from '../utils/constants'
 
 // === panel izquierdo que comparten login y registro ===
 export default function AuthStory() {
@@ -15,8 +15,15 @@ export default function AuthStory() {
       <div className="auth-labs">
         <p className="auth-labs-title">Laboratorios</p>
         <ul className="auth-labs-list">
-          {LABS.map((lab) => (
-            <li key={lab}>{lab}</li>
+          {BUILDINGS.map((building) => (
+            <li key={building.id} className="auth-labs-building">
+              <span className="auth-labs-building-name">{building.label}</span>
+              <ul className="auth-labs-chips">
+                {LABS.filter((lab) => lab.building === building.id).map((lab) => (
+                  <li key={lab.id} className="auth-labs-chip">{lab.label}</li>
+                ))}
+              </ul>
+            </li>
           ))}
         </ul>
         <p className="auth-labs-hours">
