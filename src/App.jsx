@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
+import AccessDeniedPage from './pages/AccessDeniedPage'
 import LoginPage from './pages/LoginPage'
+import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
 import * as authService from './services/authService'
 import { clearSession, getStoredUser, getToken, saveSession } from './utils/session'
@@ -46,8 +48,12 @@ export default function App() {
         path="/labs"
         element={token ? <SessionPlaceholder user={user} onLogout={handleLogout} /> : <Navigate to="/login" replace />}
       />
-      {/* === cualquier otra ruta manda a /labs o a /login según haya sesión === */}
-      <Route path="*" element={<Navigate to={token ? '/labs' : '/login'} replace />} />
+      {/* === la raíz manda a /labs o a /login según haya sesión === */}
+      <Route path="/" element={<Navigate to={token ? '/labs' : '/login'} replace />} />
+      {/* === aquí redirige el apiClient cuando la API responde 403 === */}
+      <Route path="/acceso-restringido" element={<AccessDeniedPage user={user} onLogout={handleLogout} />} />
+      {/* === cualquier ruta que no existe muestra el 404 === */}
+      <Route path="*" element={<NotFoundPage user={user} onLogout={handleLogout} />} />
     </Routes>
   )
 }

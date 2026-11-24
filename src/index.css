@@ -12,6 +12,18 @@
   --color-error-bg: #fef2f2;
   --color-error-border: #e97373;
   --color-error-text: #991b1b;
+  /* === estatus de las computadoras: texto, fondo y borde fino de los chips === */
+  --color-available-text: #166534;
+  --color-available-bg: #ecfdf5;
+  --color-available-border: #62d3ad;
+  --color-occupied-text: #b91c1c;
+  --color-occupied-bg: #fef2f2;
+  --color-occupied-border: #e97373;
+  --color-maintenance-text: #92400e;
+  --color-maintenance-bg: #fffbeb;
+  --color-maintenance-border: #f9c15f;
+  /* === letra de ancho fijo para números de inventario y rutas === */
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
   font-family: Inter, 'Segoe UI', Arial, sans-serif;
   color: var(--color-text);
@@ -203,7 +215,7 @@ button:focus-visible, a:focus-visible {
 }
 
 /* === banner de error del kit: borde rojo claro, fondo rosa y un "!" === */
-.auth-form-error {
+.auth-form-error, .error-banner {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -216,8 +228,8 @@ button:focus-visible, a:focus-visible {
   font-size: 14px;
   font-weight: 600;
 }
-.auth-form-error span { font-weight: 800; }
-.auth-form-error p { margin: 0; }
+.auth-form-error span, .error-banner span { font-weight: 800; }
+.auth-form-error p, .error-banner p { margin: 0; }
 
 .auth-form-submit {
   display: flex;
@@ -289,6 +301,212 @@ button:focus-visible, a:focus-visible {
 
 .session-placeholder button:hover { background: var(--color-primary-hover); }
 
+/* === pantallas con header: header arriba, contenido al centro y pie abajo === */
+.app-page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  background: var(--color-page);
+}
+
+/* === header blanco con logo, enlaces y usuario === */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-height: 72px;
+  padding: 12px 32px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.app-header-brand img { width: 72px; height: auto; }
+.app-header-nav { display: flex; gap: 8px; margin: 0 auto; }
+.app-header-link {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.app-header-link:hover { color: var(--color-text); background: var(--color-surface); }
+.app-header-link-active, .app-header-link-active:hover { color: var(--color-primary); }
+.app-header-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+.app-header-user button {
+  border: 0;
+  padding: 0;
+  color: var(--color-primary);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.app-header-user button:hover { color: var(--color-primary-hover); text-decoration: underline; }
+
+.app-footer { padding: 24px 32px; color: var(--color-text-secondary); font-size: 12px; }
+
+/* === pantallas de error (403, 404, 500 y sin conexión): tarjeta blanca al centro === */
+.error-main { display: grid; place-items: center; padding: 48px 24px; }
+.error-card {
+  width: min(720px, 100%);
+  padding: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+
+/* === bloque oscuro de arriba con el código del error === */
+.error-code-block {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  min-height: 156px;
+  padding: 24px 40px;
+  border-radius: 8px;
+  color: var(--color-white);
+  background: var(--color-charcoal);
+}
+.error-code {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.error-code svg { width: 0.84em; height: 0.84em; margin: 0 0.04em; transform: translateY(0.06em); }
+.error-icon { width: 80px; height: 80px; }
+.error-icon-cut { stroke: var(--color-charcoal); stroke-width: 12; }
+.error-code-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* === mini mapa del 404: estaciones con los colores de estatus del kit === */
+.error-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.error-station {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.error-station-number { color: var(--color-text); font-family: var(--font-mono); font-size: 13px; }
+.error-station-status { display: flex; align-items: center; gap: 6px; }
+.error-station-status::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.error-station-disponible {
+  border-color: var(--color-available-border);
+  color: var(--color-available-text);
+  background: var(--color-available-bg);
+}
+.error-station-ocupada {
+  border-color: var(--color-occupied-border);
+  color: var(--color-occupied-text);
+  background: var(--color-occupied-bg);
+}
+.error-station-mantenimiento {
+  border-color: var(--color-maintenance-border);
+  color: var(--color-maintenance-text);
+  background: var(--color-maintenance-bg);
+}
+/* === la celda 12 es la PC que no existe: borde punteado y sin color de estatus === */
+.error-station-missing {
+  border: 1px dashed var(--color-text-secondary);
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+}
+.error-station-missing .error-station-status::before { display: none; }
+
+/* === chip con la ruta que no se encontró === */
+.error-path {
+  display: inline-block;
+  max-width: 100%;
+  margin: 24px 0 0;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.error-title { margin: 32px 0 0; color: var(--color-text); font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; }
+.error-path + .error-title { margin-top: 12px; }
+.error-text { margin: 12px 0 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.6; }
+.error-banner { margin: 24px 0 0; }
+.error-note { margin: 24px 0 0; color: var(--color-text-secondary); font-size: 12px; }
+
+/* === botones de 48 px: rojo el principal, blanco con borde el secundario === */
+.error-actions { display: flex; gap: 12px; margin-top: 32px; }
+.error-button {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.error-button:hover:not(:disabled) { background: var(--color-primary-hover); }
+.error-button:disabled { cursor: wait; }
+.error-button-secondary { border-color: var(--color-border); color: var(--color-text); background: var(--color-white); }
+.error-button-secondary:hover:not(:disabled) { background: var(--color-surface); }
+
 @media (max-width: 900px) {
   .auth-story { padding: 24px 24px 24px 32px; }
   .auth-story-copy h1 { font-size: 34px; }
@@ -302,6 +520,24 @@ button:focus-visible, a:focus-visible {
   .auth-card-brand img { width: 96px; height: auto; }
   .auth-card-brand span { color: var(--color-text); font-size: 16px; font-weight: 800; }
   .auth-card-header h1 { font-size: 24px; }
+
+  /* === en celular los enlaces del header bajan a una segunda fila === */
+  .app-header { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+  .app-header-nav { order: 3; width: 100%; margin: 0; }
+  .app-header-user { margin-left: auto; }
+  .app-footer { padding: 16px; }
+
+  .error-main { place-items: start center; padding: 24px 16px; }
+  .error-card { padding: 20px; }
+  .error-code-block { flex-direction: column; align-items: flex-start; gap: 12px; min-height: 0; padding: 24px; }
+  .error-code { font-size: 64px; }
+  .error-icon { width: 64px; height: 64px; }
+  .error-map { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .error-station { padding: 8px; }
+  .error-station-status::before { display: none; }
+  .error-title { font-size: 24px; }
+  .error-actions { flex-direction: column; }
+  .error-button { flex: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -4,6 +4,13 @@ export const ROLES = {
   USER: 'USER',
 }
 
+// === estatus que puede tener una computadora, tal cual los manda la API ===
+export const COMPUTER_STATUS = {
+  DISPONIBLE: 'DISPONIBLE',
+  OCUPADA: 'OCUPADA',
+  MANTENIMIENTO: 'MANTENIMIENTO',
+}
+
 // === edificios con laboratorios, en el orden en que se muestran ===
 export const BUILDINGS = [
   { id: 'A', label: 'Edificio A' },
