@@ -26,6 +26,9 @@ export const STATUS_FILTERS = [
   { value: COMPUTER_STATUS.MANTENIMIENTO, label: 'Mantenimiento' },
 ]
 
+// === horas que se pueden elegir al asignar una PC, como el segmentado del kit ===
+export const SESSION_HOURS = [1, 2, 3, 4]
+
 // === edificios y laboratorios de la UTR, solo para el panel del login, el mapa pide los labs a la API ===
 export const BUILDINGS = [
   { id: 'A', label: 'Edificio A' },
