@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthStory from '../components/AuthStory'
-import { UTR_EMAIL_REGEX } from '../utils/constants'
+import { EMAIL_REGEX } from '../utils/constants'
 import { getErrorMessage } from '../utils/httpErrors'
 
 // === onLogin viene de App, ahí se guarda la sesión ===
@@ -36,9 +36,9 @@ export default function LoginPage({ onLogin }) {
       setError('Ingresa tu correo institucional y contraseña.')
       return
     }
-    // === el correo tiene que ser institucional ===
-    if (!UTR_EMAIL_REGEX.test(form.email.trim())) {
-      setError('Usa tu correo institucional (@utr.edu.mx).')
+    // === el correo tiene que tener forma de correo ===
+    if (!EMAIL_REGEX.test(form.email.trim())) {
+      setError('Escribe un correo válido.')
       return
     }
 
