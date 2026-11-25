@@ -16,6 +16,23 @@ export async function getComputers({ laboratorio, estatus }) {
   return data
 }
 
+// === solo ADMIN: da de alta una PC, regresa algo como { id, numeroInventario, estatus: 'DISPONIBLE' } ===
+export async function createComputer({ numeroInventario, laboratorio, especificaciones, perifericosIncluidos }) {
+  const { data } = await apiClient.post('/labs/computers', {
+    numeroInventario,
+    laboratorio,
+    especificaciones,
+    perifericosIncluidos,
+  })
+  return data
+}
+
+// === solo ADMIN: da de alta un periférico (proyector, cable HDMI o switch) ===
+export async function createEquipment({ tipo, numeroSerie, laboratorio }) {
+  const { data } = await apiClient.post('/labs/equipment', { tipo, numeroSerie, laboratorio })
+  return data
+}
+
 // === aparta una PC para el usuario, regresa algo como { assignmentId, estatus: 'ASIGNADA', inicio } ===
 export async function assignComputer({ computerId, userId, materia, horasUso }) {
   const { data } = await apiClient.post('/labs/assignments', { computerId, userId, materia, horasUso })
