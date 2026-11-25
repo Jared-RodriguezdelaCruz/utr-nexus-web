@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import AppHeader from '../components/AppHeader'
+import AssignComputerModal from '../components/AssignComputerModal'
 import ErrorState from '../components/ErrorState'
 import StatusBadge from '../components/StatusBadge'
 import { getComputers, getLabs } from '../services/labService'
@@ -16,7 +17,7 @@ const SKELETON_CARDS = [1, 2, 3, 4, 5, 6, 7, 8]
 
 // === C1 mapa de laboratorio: pestañas de laboratorio, filtros de estatus y la cuadrícula de PCs ===
 export default function LabsGridPage({ user, onLogout }) {
-  // === estados: labs de la API, lab y filtro elegidos, las PCs, carga, error y reintentos ===
+  // === estados: labs de la API, lab y filtro elegidos, las PCs, carga, error, reintentos y la PC del modal ===
   const [labs, setLabs] = useState([])
   const [laboratorio, setLaboratorio] = useState('')
   const [estatus, setEstatus] = useState('')
@@ -24,6 +25,7 @@ export default function LabsGridPage({ user, onLogout }) {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const [retryCount, setRetryCount] = useState(0)
+  const [selectedComputer, setSelectedComputer] = useState(null)
 
   // === al abrir la página pedimos los nombres de los laboratorios ===
   useEffect(() => {
@@ -93,6 +95,16 @@ export default function LabsGridPage({ user, onLogout }) {
     setEstatus(value)
   }
 
+  // === al tocar "Asignar equipo" guardamos la PC y se abre el modal C2 ===
+  const handleSelect = (computer) => {
+    setSelectedComputer(computer)
+  }
+
+  // === Cancelar, Esc o clic afuera: sin PC elegida el modal se cierra ===
+  const handleCloseModal = () => {
+    setSelectedComputer(null)
+  }
+
   // === botón Reintentar: quitamos el error y sumamos un reintento para que los efectos corran otra vez ===
   const handleRetry = () => {
     setError(null)
@@ -149,7 +161,19 @@ export default function LabsGridPage({ user, onLogout }) {
             <h2 className="pc-card-number">{computer.numeroInventario}</h2>
             <p className="pc-card-specs">{computer.especificaciones}</p>
             <StatusBadge estatus={computer.estatus} />
-            {STATUS_NOTES[computer.estatus] && <p className="pc-card-note">{STATUS_NOTES[computer.estatus]}</p>}
+            {/* === solo las PCs disponibles se pueden pedir, las demás muestran su nota === */}
+            {computer.estatus === COMPUTER_STATUS.DISPONIBLE ? (
+              <button
+                type="button"
+                className="pc-card-button"
+                aria-label={`Asignar equipo ${computer.numeroInventario}`}
+                onClick={() => handleSelect(computer)}
+              >
+                Asignar equipo
+              </button>
+            ) : (
+              <p className="pc-card-note">{STATUS_NOTES[computer.estatus]}</p>
+            )}
           </li>
         ))}
       </ul>
@@ -203,6 +227,11 @@ export default function LabsGridPage({ user, onLogout }) {
       </main>
 
       <footer className="app-footer">© 2026 UTR Labs</footer>
+
+      {/* === modal C2, solo se pinta cuando hay una PC elegida === */}
+      {selectedComputer && (
+        <AssignComputerModal computer={selectedComputer} user={user} onClose={handleCloseModal} />
+      )}
     </div>
   )
 }
