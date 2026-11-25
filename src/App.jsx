@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
 import AccessDeniedPage from './pages/AccessDeniedPage'
+import ActiveSessionPage from './pages/ActiveSessionPage'
 import LabsGridPage from './pages/LabsGridPage'
 import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -37,6 +38,7 @@ export default function App() {
       {/* === las rutas de adentro solo se ven con sesión, ProtectedRoute manda al login si no hay token === */}
       <Route element={<ProtectedRoute token={token} user={user} />}>
         <Route path="/labs" element={<LabsGridPage user={user} onLogout={handleLogout} />} />
+        <Route path="/mi-sesion" element={<ActiveSessionPage user={user} onLogout={handleLogout} />} />
       </Route>
       {/* === la raíz manda a /labs o a /login según haya sesión === */}
       <Route path="/" element={<Navigate to={token ? '/labs' : '/login'} replace />} />
