@@ -808,8 +808,241 @@ button:focus-visible, a:focus-visible {
 .success-banner span { font-weight: 800; }
 .success-banner p { margin: 0; }
 
+/* === select de los formularios, se ve igual que los inputs === */
+.auth-form select {
+  width: 100%;
+  height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0 16px;
+  color: var(--color-text);
+  background: var(--color-white);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.auth-form select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+  outline: none;
+}
+
+/* === C4 control TI: tres contadores arriba === */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0 0;
+}
+.admin-stat {
+  padding: 16px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+.admin-stat dt { color: var(--color-text); font-size: 13px; font-weight: 600; }
+.admin-stat-value { margin: 8px 0 0; font-size: 30px; font-weight: 800; }
+.admin-stat-available { color: var(--color-available-text); }
+.admin-stat-occupied { color: var(--color-occupied-text); }
+.admin-stat-maintenance { color: var(--color-maintenance-text); }
+
+/* === pestañas: barra blanca y la elegida subrayada en rojo === */
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 0 8px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+.admin-tab {
+  flex: 0 0 auto;
+  min-width: 140px;
+  height: 48px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-secondary);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.admin-tab:hover { color: var(--color-text); }
+.admin-tab-active, .admin-tab-active:hover { border-bottom-color: var(--color-primary); color: var(--color-primary); }
+
+/* === la pestaña elegida a la izquierda y los usuarios a la derecha === */
+.admin-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 24px;
+  align-items: start;
+  margin-top: 16px;
+}
+.admin-panel {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+.admin-panel-title { margin: 0 0 16px; color: var(--color-text); font-size: 20px; }
+.admin-empty { margin: 0; color: var(--color-text-secondary); font-size: 14px; }
+
+/* === form de PC: inventario y laboratorio lado a lado === */
+.admin-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.admin-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+
+/* === chips de periféricos: rojos con palomita los marcados === */
+.admin-chips, .admin-types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.admin-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-chip-active { border-color: var(--color-error-border); color: var(--color-primary); background: var(--color-error-bg); }
+
+/* === tarjetas de tipo de periférico, la elegida con borde rojo === */
+.admin-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 56px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  background: var(--color-white);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-type:hover { background: var(--color-surface); }
+.admin-type-active, .admin-type-active:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-white); }
+
+/* === monitor: tabla con scroll propio si no cabe === */
+.admin-table-wrap { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.admin-table th {
+  padding: 10px 12px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+}
+.admin-table td { padding: 12px; border-bottom: 1px solid var(--color-border); color: var(--color-text); white-space: nowrap; }
+.admin-table-pc { font-family: var(--font-mono); }
+.admin-release-button {
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  background: var(--color-white);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-release-button:hover { border-color: var(--color-error-border); color: var(--color-primary); }
+.admin-dialog-pc { margin: 12px 0 0; color: var(--color-text); font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
+.admin-dialog-text { margin: 8px 0 0; color: var(--color-text-secondary); font-size: 13px; line-height: 1.5; }
+.admin-dialog-error { margin: 16px 0 0; }
+
+/* === gestión de usuarios: buscador y una fila por usuario === */
+.admin-search {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 13px;
+}
+.admin-search:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12); outline: none; }
+.admin-users-error { margin: 12px 0 0; }
+.admin-retry {
+  margin-left: auto;
+  border: 0;
+  color: var(--color-primary);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.admin-users .admin-empty { margin-top: 16px; }
+.admin-users-list { margin: 8px 0 0; padding: 0; list-style: none; }
+.admin-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.admin-user-info { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+.admin-user-name { margin: 0; color: var(--color-text); font-size: 13px; font-weight: 700; }
+.admin-user-email { margin: 0; color: var(--color-text-secondary); font-size: 12px; overflow-wrap: anywhere; }
+.admin-user-status {
+  padding: 2px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  font-size: 12px;
+  font-weight: 700;
+}
+.admin-user-status-active { border-color: var(--color-available-border); color: var(--color-available-text); background: var(--color-available-bg); }
+
+/* === segmentado de rol: el actual en rojo claro, el propio en gris con candado === */
+.admin-role {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex: 0 0 152px;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+.admin-role-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.admin-role-item:hover:not(:disabled) { color: var(--color-text); background: var(--color-surface); }
+.admin-role-item-active { color: var(--color-primary); background: var(--color-error-bg); }
+.admin-role-item:disabled { cursor: not-allowed; }
+.admin-role-item-active:disabled { color: var(--color-text-secondary); background: var(--color-border); }
+.admin-lock { width: 12px; height: 12px; }
+.admin-users-note { margin: 16px 0 0; color: var(--color-text-secondary); font-size: 12px; }
+
 @media (max-width: 1024px) {
   .labs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* === en pantallas medianas los usuarios bajan debajo de la pestaña === */
+  .admin-layout { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 900px) {
@@ -866,6 +1099,13 @@ button:focus-visible, a:focus-visible {
   .session-form { padding: 20px; }
   .session-empty { margin-top: 24px; padding: 20px; }
   .session-empty-title { font-size: 22px; }
+
+  /* === en celular C4 va en una columna y las pestañas se deslizan === */
+  .admin-stats { grid-template-columns: 1fr; gap: 12px; }
+  .admin-stat-value { font-size: 24px; }
+  .admin-tab { min-width: 0; }
+  .admin-panel { padding: 20px 16px; }
+  .admin-form-row, .admin-chips, .admin-types { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
