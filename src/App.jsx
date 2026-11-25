@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
+import ProtectedRoute from './components/ProtectedRoute'
 import AccessDeniedPage from './pages/AccessDeniedPage'
 import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -43,11 +44,10 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
       <Route path="/register" element={<RegisterPage />} />
-      {/* === /labs solo se ve con token, si no hay sesión regresa al login === */}
-      <Route
-        path="/labs"
-        element={token ? <SessionPlaceholder user={user} onLogout={handleLogout} /> : <Navigate to="/login" replace />}
-      />
+      {/* === las rutas de adentro solo se ven con sesión, ProtectedRoute manda al login si no hay token === */}
+      <Route element={<ProtectedRoute token={token} user={user} />}>
+        <Route path="/labs" element={<SessionPlaceholder user={user} onLogout={handleLogout} />} />
+      </Route>
       {/* === la raíz manda a /labs o a /login según haya sesión === */}
       <Route path="/" element={<Navigate to={token ? '/labs' : '/login'} replace />} />
       {/* === aquí redirige el apiClient cuando la API responde 403 === */}

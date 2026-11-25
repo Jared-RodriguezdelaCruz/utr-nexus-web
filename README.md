@@ -23,6 +23,8 @@ npm run dev
 | `VITE_API_BASE_URL` | URL base de la API (incluye `/api`) |
 | `VITE_API_APP_TOKEN` | Token de aplicación (header `x-api-token`) |
 
+La API del curso está en `https://proyecto-idgs9-v1.onrender.com/api` y su documentación (Swagger) en <https://proyecto-idgs9-v1.onrender.com/api/docs/>. El token del equipo lo da el docente: va solo en `.env`, nunca en un commit.
+
 ## Ramas
 
 - `main`: versión entregable
