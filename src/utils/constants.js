@@ -35,6 +35,12 @@ export const ASSIGNMENT_STATUS = {
   LIBERADA: 'LIBERADA',
 }
 
+// === periféricos que trae una PC al darla de alta, en C4 empiezan todos marcados ===
+export const PERIPHERALS = ['Monitor', 'Teclado', 'Mouse']
+
+// === tipos de periférico que acepta el contrato al registrar uno en C4 ===
+export const EQUIPMENT_TYPES = ['Proyector', 'Cable HDMI', 'Switch']
+
 // === edificios y laboratorios de la UTR, solo para el panel del login, el mapa pide los labs a la API ===
 export const BUILDINGS = [
   { id: 'A', label: 'Edificio A' },
@@ -44,7 +50,7 @@ export const BUILDINGS = [
   { id: 'VINC', label: 'Vinculación' },
 ]
 
-// === laboratorios de cada edificio para el mismo panel del login ===
+// === laboratorios reales de cada edificio, los usan el panel del login y el select de C4 ===
 export const LABS = [
   { id: 'AL-01', label: 'AL-01', building: 'A' },
   { id: 'AL-02', label: 'AL-02', building: 'A' },
