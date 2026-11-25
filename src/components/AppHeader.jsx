@@ -1,4 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { ROLES } from '../utils/constants'
 
 // === el enlace de la página en la que estamos se pinta en rojo ===
 const getLinkClass = ({ isActive }) => (isActive ? 'app-header-link app-header-link-active' : 'app-header-link')
@@ -26,7 +27,12 @@ export default function AppHeader({ user, onLogout }) {
           <nav className="app-header-nav" aria-label="Principal">
             {/* === end para que /labs/lo-que-sea no lo marque como activo === */}
             <NavLink to="/labs" end className={getLinkClass}>Mapa de laboratorios</NavLink>
-            <NavLink to="/mi-sesion" className={getLinkClass}>Mi sesión</NavLink>
+            {/* === el ADMIN ve su panel en lugar de Mi sesión, como en Figma === */}
+            {user.rol === ROLES.ADMIN ? (
+              <NavLink to="/admin" className={getLinkClass}>Administración TI</NavLink>
+            ) : (
+              <NavLink to="/mi-sesion" className={getLinkClass}>Mi sesión</NavLink>
+            )}
           </nav>
           <div className="app-header-user">
             <span>{user.nombre}</span>
