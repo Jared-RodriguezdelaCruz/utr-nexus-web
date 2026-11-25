@@ -2,22 +2,12 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
 import AccessDeniedPage from './pages/AccessDeniedPage'
+import LabsGridPage from './pages/LabsGridPage'
 import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
 import * as authService from './services/authService'
 import { clearSession, getStoredUser, getToken, saveSession } from './utils/session'
-
-// === pantalla temporal para /labs mientras no existe la página del mapa de PCs ===
-function SessionPlaceholder({ user, onLogout }) {
-  return (
-    <main className="session-placeholder">
-      <h1>Sesión iniciada</h1>
-      <p>{user?.nombre ?? 'Usuario UTR'}</p>
-      <button type="button" onClick={onLogout}>Cerrar sesión</button>
-    </main>
-  )
-}
 
 export default function App() {
   // === token y user arrancan con lo que haya en localStorage, así la sesión sobrevive al recargar ===
@@ -46,7 +36,7 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
       {/* === las rutas de adentro solo se ven con sesión, ProtectedRoute manda al login si no hay token === */}
       <Route element={<ProtectedRoute token={token} user={user} />}>
-        <Route path="/labs" element={<SessionPlaceholder user={user} onLogout={handleLogout} />} />
+        <Route path="/labs" element={<LabsGridPage user={user} onLogout={handleLogout} />} />
       </Route>
       {/* === la raíz manda a /labs o a /login según haya sesión === */}
       <Route path="/" element={<Navigate to={token ? '/labs' : '/login'} replace />} />
