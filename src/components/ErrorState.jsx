@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 // === tarjeta para cuando falla la carga de datos (error 500 o sin conexión), la van a usar el mapa y mi sesión ===
 export default function ErrorState({ isOffline, isLoading, onRetry }) {
+  // === en el propio mapa no tiene caso mostrar "Ir al mapa" ===
+  const location = useLocation()
+  const showMapLink = !isOffline && location.pathname !== '/labs'
+
   return (
     <section className="error-card" aria-labelledby="error-state-title">
       {/* === sin conexión va un monitor tachado, con error del servidor va el 500 === */}
@@ -35,7 +39,7 @@ export default function ErrorState({ isOffline, isLoading, onRetry }) {
       )}
 
       <div className="error-actions">
-        {!isOffline && <Link to="/labs" className="error-button error-button-secondary">Ir al mapa</Link>}
+        {showMapLink && <Link to="/labs" className="error-button error-button-secondary">Ir al mapa</Link>}
         {/* === mientras reintenta el botón queda deshabilitado y muestra el spinner === */}
         <button type="button" className="error-button" onClick={onRetry} disabled={isLoading}>
           {isLoading && <span className="auth-spinner" aria-hidden="true" />}
