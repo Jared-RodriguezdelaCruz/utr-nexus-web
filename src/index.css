@@ -268,38 +268,15 @@ button:focus-visible, a:focus-visible {
 .auth-card-support a { color: var(--color-text-secondary); }
 .auth-panel-footer { margin: 0; padding: 16px 0 24px; color: var(--color-text-secondary); text-align: center; font-size: 12px; }
 
-.session-placeholder {
-  min-height: 100vh;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  background: var(--color-page);
+/* === texto que solo lee el lector de pantalla === */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-
-.session-placeholder h1 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 30px;
-}
-
-.session-placeholder p {
-  color: var(--color-text-secondary);
-  font-size: 14px;
-}
-
-.session-placeholder button {
-  height: 48px;
-  padding: 0 24px;
-  border: 0;
-  border-radius: 8px;
-  color: var(--color-white);
-  background: var(--color-primary);
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.session-placeholder button:hover { background: var(--color-primary-hover); }
 
 /* === pantallas con header: header arriba, contenido al centro y pie abajo === */
 .app-page {
@@ -507,6 +484,138 @@ button:focus-visible, a:focus-visible {
 .error-button-secondary { border-color: var(--color-border); color: var(--color-text); background: var(--color-white); }
 .error-button-secondary:hover:not(:disabled) { background: var(--color-surface); }
 
+/* === C1 mapa de laboratorio === */
+.labs-main { width: 100%; max-width: 1200px; margin: 0 auto; padding: 40px 32px; }
+.labs-title { margin: 0; color: var(--color-text); font-size: 30px; line-height: 1.2; letter-spacing: -0.03em; }
+.labs-subtitle { margin: 8px 0 0; color: var(--color-text-secondary); font-size: 14px; }
+
+/* === laboratorios y filtros: blancos con borde, el elegido en rojo === */
+.labs-tabs, .labs-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.labs-tabs { margin-top: 24px; }
+.labs-filters { margin-top: 16px; }
+.labs-chip {
+  min-width: 96px;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  background: var(--color-white);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.labs-chip:hover { background: var(--color-surface); }
+.labs-chip-active, .labs-chip-active:hover { border-color: var(--color-primary); color: var(--color-white); background: var(--color-primary); }
+.labs-filters .labs-chip { min-width: 120px; }
+
+/* === franja del frente del salón === */
+.labs-board {
+  margin: 16px 0 0;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* === cuadrícula de PCs: 4 columnas en escritorio === */
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+.pc-card-label, .pc-card-specs, .pc-card-note { margin: 0; color: var(--color-text-secondary); font-size: 12px; }
+.pc-card-specs { font-size: 13px; }
+.pc-card-number {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* === chip de estatus del kit: punto, símbolo y texto con borde fino === */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-badge-disponible {
+  border-color: var(--color-available-border);
+  color: var(--color-available-text);
+  background: var(--color-available-bg);
+}
+.status-badge-ocupada {
+  border-color: var(--color-occupied-border);
+  color: var(--color-occupied-text);
+  background: var(--color-occupied-bg);
+}
+.status-badge-mantenimiento {
+  border-color: var(--color-maintenance-border);
+  color: var(--color-maintenance-text);
+  background: var(--color-maintenance-bg);
+}
+
+/* === skeleton del kit: barras grises que pulsan mientras carga === */
+.pc-card-skeleton { gap: 12px; }
+.skeleton-bar {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--color-surface);
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+.skeleton-bar-short { width: 50%; }
+.skeleton-bar-medium { width: 70%; }
+.skeleton-bar-button { height: 40px; margin-top: 8px; border-radius: 8px; }
+@keyframes skeleton-pulse {
+  50% { opacity: 0.5; }
+}
+
+/* === estado vacío y error dentro del mapa === */
+.labs-empty {
+  margin-top: 16px;
+  padding: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+}
+.labs-empty h2 { margin: 0; color: var(--color-text); font-size: 20px; }
+.labs-empty p { margin: 8px 0 0; color: var(--color-text-secondary); font-size: 14px; }
+.labs-error { display: flex; justify-content: center; margin-top: 16px; }
+
+@media (max-width: 1024px) {
+  .labs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 @media (max-width: 900px) {
   .auth-story { padding: 24px 24px 24px 32px; }
   .auth-story-copy h1 { font-size: 34px; }
@@ -538,6 +647,17 @@ button:focus-visible, a:focus-visible {
   .error-title { font-size: 24px; }
   .error-actions { flex-direction: column; }
   .error-button { flex: none; }
+
+  /* === en celular el mapa va a 2 columnas y los filtros en 2 filas === */
+  .labs-main { padding: 24px 16px; }
+  .labs-title { font-size: 24px; }
+  .labs-tabs .labs-chip { flex: 1; min-width: 0; }
+  .labs-filters { display: grid; grid-template-columns: 1fr 1fr; }
+  .labs-filters .labs-chip { min-width: 0; }
+  .labs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .pc-card { padding: 12px; }
+  .pc-card-number { font-size: 15px; }
+  .labs-empty { padding: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

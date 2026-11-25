@@ -11,7 +11,22 @@ export const COMPUTER_STATUS = {
   MANTENIMIENTO: 'MANTENIMIENTO',
 }
 
-// === edificios con laboratorios, en el orden en que se muestran ===
+// === texto que ve el usuario para cada estatus ===
+export const STATUS_LABELS = {
+  [COMPUTER_STATUS.DISPONIBLE]: 'Disponible',
+  [COMPUTER_STATUS.OCUPADA]: 'Ocupada',
+  [COMPUTER_STATUS.MANTENIMIENTO]: 'Mantenimiento',
+}
+
+// === filtros del mapa, value vacío es "Todos" y no se manda a la API ===
+export const STATUS_FILTERS = [
+  { value: '', label: 'Todos' },
+  { value: COMPUTER_STATUS.DISPONIBLE, label: 'Disponibles' },
+  { value: COMPUTER_STATUS.OCUPADA, label: 'Ocupadas' },
+  { value: COMPUTER_STATUS.MANTENIMIENTO, label: 'Mantenimiento' },
+]
+
+// === edificios y laboratorios de la UTR, solo para el panel del login, el mapa pide los labs a la API ===
 export const BUILDINGS = [
   { id: 'A', label: 'Edificio A' },
   { id: 'B', label: 'Edificio B' },
@@ -20,7 +35,7 @@ export const BUILDINGS = [
   { id: 'VINC', label: 'Vinculación' },
 ]
 
-// === laboratorios, la API no tiene un endpoint para pedirlos: id va a la API y label lo ve el usuario ===
+// === laboratorios de cada edificio para el mismo panel del login ===
 export const LABS = [
   { id: 'AL-01', label: 'AL-01', building: 'A' },
   { id: 'AL-02', label: 'AL-02', building: 'A' },
