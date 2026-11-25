@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AppHeader from '../components/AppHeader'
-import { COMPUTER_STATUS } from '../utils/constants'
+import { COMPUTER_STATUS, STATUS_LABELS } from '../utils/constants'
 
 // === estaciones de ejemplo para el dibujo del mini mapa, no vienen de la API ===
 const DEMO_STATIONS = [
@@ -16,13 +16,6 @@ const DEMO_STATIONS = [
   { id: 'UTR-PC-10', estatus: COMPUTER_STATUS.MANTENIMIENTO },
   { id: 'UTR-PC-11', estatus: COMPUTER_STATUS.OCUPADA },
 ]
-
-// === texto que se ve en cada estatus ===
-const STATUS_LABELS = {
-  [COMPUTER_STATUS.DISPONIBLE]: 'Disponible',
-  [COMPUTER_STATUS.OCUPADA]: 'Ocupada',
-  [COMPUTER_STATUS.MANTENIMIENTO]: 'Mantenimiento',
-}
 
 // === se muestra con cualquier ruta que no existe, la página es como una PC que no está en el inventario ===
 export default function NotFoundPage({ user, onLogout }) {
